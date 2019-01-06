@@ -26,12 +26,17 @@ function plot(fert) {
     }
 }
 
-var grains = 0;
+var player = {
+  grains: 0,
+  money: 0
+}
 var g = document.createElement("div");
+var m = document.createElement("div");
 var plots = [new plot(10),new plot(11),new plot(12)];
 var p = document.createElement("div");
 function redraw() {
-    g.innerHTML = "Grains: "+grains.toString();
+    g.innerHTML = "Grains: "+player.grains.toString();
+    m.innerHTML = "Money: "+player.money.toString();
     p.innerHTML = "";
     plots.forEach(function(e) {
         var progress = document.createElement("progress");
@@ -48,22 +53,39 @@ window.setInterval(function() {
 var b = document.createElement("button");
 b.innerHTML = "Harvest";
 b.addEventListener("click",function() {
-    plots.forEach(function(e) {grains += e.harvest();});
+    plots.forEach(function(e) {player.grains += e.harvest();});
     redraw();
 });
 var s = document.createElement("button");
 s.innerHTML = "Re-sew";
 s.addEventListener("click",function() {
     plots.forEach(function(e) {
-        if(grains > 0 && e.state == 2) {
+        if(player.grains > 0 && e.state == 2) {
             e.state = 0;
-            grains--;
+            player.grains--;
         }
     });
     redraw();
 });
+var w = document.createElement("button");
+w.innerHTML = "Sell 1 Grains";
+w.addEventListener("click",function() {
+    if (player.grains > 0) {player.grains--; player.money++; redraw();}
+});
 document.body.appendChild(g);
+document.body.appendChild(m);
 document.body.appendChild(b);
 document.body.appendChild(s);
+document.body.appendChild(w);
 document.body.appendChild(p);
 redraw();
+
+/*
+  Added m.
+  m = money.
+
+  Added w.
+  w = sell wheat.
+
+  Made player data into an object, so it's easier to save + load. Better now than later.
+*/
