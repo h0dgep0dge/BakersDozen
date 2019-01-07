@@ -70,7 +70,7 @@ s.addEventListener("click",function() {
 var w = document.createElement("button");
 w.innerHTML = "Sell 1 Grain";
 w.addEventListener("click",function() {
-    if (player.grains > 0) {player.grains--; player.money++; redraw();}
+    if (player.grains > 1) {player.grains--; player.money++; redraw();}
 });
 document.body.appendChild(g);
 document.body.appendChild(m);
