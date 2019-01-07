@@ -3,7 +3,7 @@ function plot(fert) {
         // State
         //  0 growing
         //  1 grown, ready to harvest()
-        //  2 empty, needs sew()ing
+        //  2 empty, needs sowing
     this.fertility = fert; // Number of ticks to fully grow
     this.growth = 0;
     this.yeild = 3; // Yeild constant, the maximum grains harvested
@@ -27,8 +27,8 @@ function plot(fert) {
 }
 
 var player = {
-  grains: 0,
-  money: 0
+    grains: 0,
+    money: 0
 }
 var g = document.createElement("div");
 var m = document.createElement("div");
@@ -57,7 +57,7 @@ b.addEventListener("click",function() {
     redraw();
 });
 var s = document.createElement("button");
-s.innerHTML = "Re-sew";
+s.innerHTML = "Re-sow";
 s.addEventListener("click",function() {
     plots.forEach(function(e) {
         if(player.grains > 0 && e.state == 2) {
@@ -68,7 +68,7 @@ s.addEventListener("click",function() {
     redraw();
 });
 var w = document.createElement("button");
-w.innerHTML = "Sell 1 Grains";
+w.innerHTML = "Sell 1 Grain";
 w.addEventListener("click",function() {
     if (player.grains > 0) {player.grains--; player.money++; redraw();}
 });
@@ -79,13 +79,3 @@ document.body.appendChild(s);
 document.body.appendChild(w);
 document.body.appendChild(p);
 redraw();
-
-/*
-  Added m.
-  m = money.
-
-  Added w.
-  w = sell wheat.
-
-  Made player data into an object, so it's easier to save + load. Better now than later.
-*/
